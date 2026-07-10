@@ -1,0 +1,4 @@
+interface:
+  display_name: "I18n Guidance"
+  short_description: "Search W3C i18n guide library"
+  default_prompt: "Use $i18n-guidance to find and apply W3C internationalization guidance before changing web-facing behavior."

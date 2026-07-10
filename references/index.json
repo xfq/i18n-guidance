@@ -1,0 +1,82 @@
+[
+  {
+    "id": "choose-utf-8-encoding",
+    "title": "Choose UTF-8 Encoding",
+    "description": "Choose and declare UTF-8 for web content, CSS, forms, and migration work.",
+    "category": "characters-encodings",
+    "tasks": ["encoding", "utf8", "utf-8", "charset", "characters", "forms", "migration"],
+    "keywords": ["utf8", "utf-8", "charset", "encoding declaration", "character encoding", "forms", "bom", "legacy encoding"]
+  },
+  {
+    "id": "declare-document-language",
+    "title": "Declare Document Language",
+    "description": "Declare the overall language of HTML and use language metadata for text processing.",
+    "category": "language-metadata",
+    "tasks": ["html", "lang", "language", "metadata", "document language", "page language"],
+    "keywords": ["lang", "html lang", "page language", "document language", "language metadata", "text processing", "content-language"]
+  },
+  {
+    "id": "choose-language-tags",
+    "title": "Choose Language Tags",
+    "description": "Choose BCP 47 language tags for HTML, XML, locale metadata, and Chinese script distinctions.",
+    "category": "language-metadata",
+    "tasks": ["bcp47", "language tag", "locale", "zh-hans", "zh-hant"],
+    "keywords": ["bcp 47", "bcp47", "language tag", "subtag", "zh-hans", "zh-hant", "zxx", "und", "locale"]
+  },
+  {
+    "id": "mark-non-translatable-content",
+    "title": "Mark Non-Translatable Content",
+    "description": "Use translation metadata to protect names, code, and other text that should remain unchanged.",
+    "category": "localization",
+    "tasks": ["translate", "non-translatable", "product names", "machine translation", "localization"],
+    "keywords": ["translate attribute", "not translatable", "non-translatable", "product name", "brand", "code", "machine translation"]
+  },
+  {
+    "id": "handle-bidirectional-text",
+    "title": "Handle Bidirectional Text",
+    "description": "Handle RTL, LTR, and mixed-direction text with correct base direction and isolation.",
+    "category": "bidi-layout",
+    "tasks": ["rtl", "bidi", "bidirectional", "arabic", "hebrew", "mixed direction"],
+    "keywords": ["rtl", "bidi", "bidirectional text", "arabic", "hebrew", "mixed-direction", "dir", "bdi", "base direction", "isolation"]
+  },
+  {
+    "id": "use-logical-css-layout",
+    "title": "Use Logical CSS Layout",
+    "description": "Use CSS logical properties and flow-relative thinking for RTL and vertical writing.",
+    "category": "bidi-layout",
+    "tasks": ["css", "logical properties", "rtl layout", "margins", "padding", "layout"],
+    "keywords": ["css logical properties", "logical", "margin-inline-start", "padding-inline", "left right", "rtl layout", "vertical writing", "flow-relative"]
+  },
+  {
+    "id": "align-text-by-direction",
+    "title": "Align Text By Direction",
+    "description": "Use direction-aware text alignment and avoid unnecessary left/right overrides.",
+    "category": "typography-layout",
+    "tasks": ["text align", "alignment", "left", "right", "start", "end"],
+    "keywords": ["text-align", "alignment", "left", "right", "start", "end", "hard-coded left", "hard-coded right", "direction"]
+  },
+  {
+    "id": "support-writing-modes",
+    "title": "Support Writing Modes",
+    "description": "Prepare layout and text styling for vertical writing and non-horizontal scripts.",
+    "category": "typography-layout",
+    "tasks": ["writing mode", "vertical", "japanese", "css", "layout"],
+    "keywords": ["writing-mode", "vertical writing", "vertical", "japanese", "mongolian", "sideways", "line orientation"]
+  },
+  {
+    "id": "configure-hyphenation",
+    "title": "Configure Hyphenation",
+    "description": "Use language metadata and CSS hyphenation carefully for localized text.",
+    "category": "typography-layout",
+    "tasks": ["hyphenation", "hyphens", "german", "css", "lang"],
+    "keywords": ["hyphenation", "hyphens", "hyphens auto", "german", "lang", "line breaking", "dictionary"]
+  },
+  {
+    "id": "apply-global-typography",
+    "title": "Apply Global Typography",
+    "description": "Review fonts, counters, ruby, emphasis, and script-specific typography for global content.",
+    "category": "typography-layout",
+    "tasks": ["typography", "fonts", "counters", "ruby", "text decoration", "global"],
+    "keywords": ["global typography", "fonts", "counters", "counter-style", "ruby", "text decoration", "emphasis", "annotations", "script-specific"]
+  }
+]

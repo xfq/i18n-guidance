@@ -1,0 +1,9 @@
+{
+  "name": "i18n-guidance",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test",
+    "validate": "node scripts/i18n-guidance.mjs validate"
+  }
+}
