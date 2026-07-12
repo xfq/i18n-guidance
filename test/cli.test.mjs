@@ -6,8 +6,9 @@ import test from "node:test";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
 
-const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
-const cli = path.join(root, "scripts", "i18n-guidance.mjs");
+const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
+const skillRoot = path.join(repoRoot, "skills", "i18n-guidance");
+const cli = path.join(skillRoot, "scripts", "i18n-guidance.mjs");
 
 function runJson(args) {
   const output = execFileSync(process.execPath, [cli, ...args], {
@@ -106,7 +107,7 @@ test("documented SKILL_ROOT command works outside the skill and project director
     {
       cwd: os.tmpdir(),
       encoding: "utf8",
-      env: { ...process.env, SKILL_ROOT: root },
+      env: { ...process.env, SKILL_ROOT: skillRoot },
     }
   );
   const results = JSON.parse(output);
@@ -114,7 +115,7 @@ test("documented SKILL_ROOT command works outside the skill and project director
 });
 
 test("skill commands resolve the CLI from the skill root", () => {
-  const skill = fs.readFileSync(path.join(root, "SKILL.md"), "utf8");
+  const skill = fs.readFileSync(path.join(skillRoot, "SKILL.md"), "utf8");
 
   assert.match(skill, /node "\$SKILL_ROOT\/scripts\/i18n-guidance\.mjs" search/);
   assert.match(skill, /node "\$SKILL_ROOT\/scripts\/i18n-guidance\.mjs" retrieve/);
@@ -122,9 +123,17 @@ test("skill commands resolve the CLI from the skill root", () => {
   assert.doesNotMatch(skill, /node scripts\/i18n-guidance\.mjs/);
 });
 
+test("repository exposes the skill as a bundled subdirectory", () => {
+  assert.equal(fs.existsSync(path.join(repoRoot, "SKILL.md")), false);
+  assert.equal(fs.existsSync(path.join(skillRoot, "SKILL.md")), true);
+  assert.equal(fs.existsSync(path.join(skillRoot, "scripts", "i18n-guidance.mjs")), true);
+  assert.equal(fs.existsSync(path.join(skillRoot, "references", "index.json")), true);
+  assert.equal(fs.existsSync(path.join(skillRoot, "agents", "openai.yaml")), true);
+});
+
 test("retrieve fails clearly for unknown guide ids", () => {
   const result = spawnSync(process.execPath, [cli, "retrieve", "missing-guide"], {
-    cwd: root,
+    cwd: repoRoot,
     encoding: "utf8",
   });
 
@@ -134,7 +143,7 @@ test("retrieve fails clearly for unknown guide ids", () => {
 
 test("validate checks the skill and guide library", () => {
   const result = spawnSync(process.execPath, [cli, "validate"], {
-    cwd: root,
+    cwd: repoRoot,
     encoding: "utf8",
   });
 

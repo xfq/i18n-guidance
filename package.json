@@ -3,7 +3,8 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "test": "node --test",
-    "validate": "node scripts/i18n-guidance.mjs validate"
+    "test": "node --test test/cli.test.mjs",
+    "test:install": "node --test test/install.integration.mjs",
+    "validate": "node skills/i18n-guidance/scripts/i18n-guidance.mjs validate"
   }
 }

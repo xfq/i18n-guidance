@@ -1,6 +1,6 @@
 # How `i18n-guidance.mjs` Works
 
-This document explains the implementation of `i18n-guidance/scripts/i18n-guidance.mjs`.
+This document explains the implementation of `skills/i18n-guidance/scripts/i18n-guidance.mjs`.
 
 ## Role
 
