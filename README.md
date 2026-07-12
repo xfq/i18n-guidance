@@ -34,6 +34,22 @@ Install it into the current project:
 npx skills@latest add xfq/i18n-guidance
 ```
 
+## Updating
+
+When a new version of the skill is published, update a project-local installation from that project's directory:
+
+```sh
+npx skills@latest update i18n-guidance --project
+```
+
+Update a global installation with:
+
+```sh
+npx skills@latest update i18n-guidance --global
+```
+
+The command checks the installed skill against its source and replaces it only when changes are available.
+
 ## Usage
 
 List all available guides:
