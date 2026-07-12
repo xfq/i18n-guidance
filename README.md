@@ -18,6 +18,22 @@ It is designed for Codex, Claude Code, and other coding agents. The package keep
 - Node.js with built-in `node:test` support.
 - No npm package install is required.
 
+## Installation
+
+This repository is installable with the `skills` CLI.
+
+Install it globally:
+
+```sh
+npx skills@latest add xfq/i18n-guidance --global
+```
+
+Install it into the current project:
+
+```sh
+npx skills@latest add xfq/i18n-guidance
+```
+
 ## Usage
 
 List all available guides:
@@ -61,7 +77,7 @@ If search results are weak, use `list` to inspect the available guide catalog.
 
 ## Agent Integration
 
-Codex can use the `SKILL.md` and `agents/openai.yaml` metadata directly. Claude Code and other agents can use the same workflow by reading `SKILL.md` as the instruction entrypoint and calling `scripts/i18n-guidance.mjs` for guide discovery and retrieval.
+The `skills` CLI can install this repository for Codex, Claude Code, Cursor, OpenCode, and other supported agents. Codex can also use the `agents/openai.yaml` metadata directly. Other agents can use the same workflow by reading `SKILL.md` as the instruction entrypoint and calling `scripts/i18n-guidance.mjs` for guide discovery and retrieval.
 
 ## Development
 
