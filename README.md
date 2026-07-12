@@ -95,6 +95,12 @@ If search results are weak, use `list` to inspect the available guide catalog.
 
 The `skills` CLI can install this repository for Codex, Claude Code, Cursor, OpenCode, and other supported agents. Codex can also use the `agents/openai.yaml` metadata directly. Other agents can use the same workflow by reading `SKILL.md` as the instruction entrypoint and calling `scripts/i18n-guidance.mjs` for guide discovery and retrieval.
 
+Example prompt for a coding agent:
+
+```text
+Use the i18n-guidance skill to declare this page's language correctly.
+```
+
 ## Development
 
 Run the test suite:
