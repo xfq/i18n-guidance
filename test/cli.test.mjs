@@ -103,11 +103,18 @@ test("retrieve returns one guide or multiple guides by id", () => {
 test("documented SKILL_ROOT command works outside the skill and project directories", () => {
   const output = execFileSync(
     "sh",
-    ["-c", 'node "$SKILL_ROOT/scripts/i18n-guidance.mjs" search "declare page language"'],
+    [
+      "-c",
+      [
+        'SKILL_ROOT="$DOCUMENTED_SKILL_ROOT"',
+        'test -f "$SKILL_ROOT/scripts/i18n-guidance.mjs"',
+        'node "$SKILL_ROOT/scripts/i18n-guidance.mjs" search "declare page language"',
+      ].join("\n"),
+    ],
     {
       cwd: os.tmpdir(),
       encoding: "utf8",
-      env: { ...process.env, SKILL_ROOT: skillRoot },
+      env: { ...process.env, DOCUMENTED_SKILL_ROOT: skillRoot },
     }
   );
   const results = JSON.parse(output);
@@ -121,6 +128,17 @@ test("skill commands resolve the CLI from the skill root", () => {
   assert.match(skill, /node "\$SKILL_ROOT\/scripts\/i18n-guidance\.mjs" retrieve/);
   assert.match(skill, /node "\$SKILL_ROOT\/scripts\/i18n-guidance\.mjs" list/);
   assert.doesNotMatch(skill, /node scripts\/i18n-guidance\.mjs/);
+  assert.match(skill, /Never combine the assignment and invocation/);
+
+  const commandBlocks = [...skill.matchAll(/```sh\n([\s\S]*?)\n```/g)]
+    .map((match) => match[1])
+    .filter((block) => block.includes("i18n-guidance.mjs"));
+  assert.equal(commandBlocks.length, 3);
+  for (const block of commandBlocks) {
+    assert.match(block, /^SKILL_ROOT="\/absolute\/path\/to\/i18n-guidance"/);
+    assert.match(block, /test -f "\$SKILL_ROOT\/scripts\/i18n-guidance\.mjs"/);
+    assert.match(block, /node "\$SKILL_ROOT\/scripts\/i18n-guidance\.mjs"/);
+  }
 });
 
 test("repository exposes the skill as a bundled subdirectory", () => {
