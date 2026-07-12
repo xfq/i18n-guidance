@@ -1,16 +1,17 @@
 import assert from "node:assert/strict";
 import { execFileSync, spawnSync } from "node:child_process";
+import fs from "node:fs";
+import os from "node:os";
 import test from "node:test";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
-const repoRoot = path.resolve(root, "..");
 const cli = path.join(root, "scripts", "i18n-guidance.mjs");
 
 function runJson(args) {
   const output = execFileSync(process.execPath, [cli, ...args], {
-    cwd: root,
+    cwd: os.tmpdir(),
     encoding: "utf8",
   });
   return JSON.parse(output);
@@ -18,7 +19,7 @@ function runJson(args) {
 
 function runText(args) {
   return execFileSync(process.execPath, [cli, ...args], {
-    cwd: root,
+    cwd: os.tmpdir(),
     encoding: "utf8",
   });
 }
@@ -98,17 +99,27 @@ test("retrieve returns one guide or multiple guides by id", () => {
   assert.match(multiple, /^# Handle Bidirectional Text/m);
 });
 
-test("documented repo-root command path works", () => {
+test("documented SKILL_ROOT command works outside the skill and project directories", () => {
   const output = execFileSync(
-    process.execPath,
-    ["i18n-guidance/scripts/i18n-guidance.mjs", "search", "declare page language"],
+    "sh",
+    ["-c", 'node "$SKILL_ROOT/scripts/i18n-guidance.mjs" search "declare page language"'],
     {
-      cwd: repoRoot,
+      cwd: os.tmpdir(),
       encoding: "utf8",
+      env: { ...process.env, SKILL_ROOT: root },
     }
   );
   const results = JSON.parse(output);
   assert.equal(results[0].id, "declare-document-language");
+});
+
+test("skill commands resolve the CLI from the skill root", () => {
+  const skill = fs.readFileSync(path.join(root, "SKILL.md"), "utf8");
+
+  assert.match(skill, /node "\$SKILL_ROOT\/scripts\/i18n-guidance\.mjs" search/);
+  assert.match(skill, /node "\$SKILL_ROOT\/scripts\/i18n-guidance\.mjs" retrieve/);
+  assert.match(skill, /node "\$SKILL_ROOT\/scripts\/i18n-guidance\.mjs" list/);
+  assert.doesNotMatch(skill, /node scripts\/i18n-guidance\.mjs/);
 });
 
 test("retrieve fails clearly for unknown guide ids", () => {
