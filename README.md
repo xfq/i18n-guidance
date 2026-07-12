@@ -1,6 +1,6 @@
 # i18n-guidance
 
-Portable agent guidance package and local CLI for finding focused W3C-backed internationalization guidance before implementing, reviewing, or editing web-facing content, UI, CSS, localization, specs, schemas, or translation work.
+My agent skills and CLI for finding focused W3C i18n guidance before implementing, reviewing, or editing web-facing content, UI, CSS, localization, specs, schemas, or translation work.
 
 It is designed for Codex, Claude Code, and other coding agents. The package keeps detailed guidance in `references/guides/` and exposes a compact search/retrieve workflow so agents can load the narrowest relevant material before acting.
 
